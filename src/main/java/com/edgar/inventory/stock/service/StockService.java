@@ -2,6 +2,8 @@ package com.edgar.inventory.stock.service;
 
 import java.time.LocalDateTime;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.edgar.inventory.entity.Product;
@@ -19,12 +21,16 @@ public class StockService {
 
     private final ProductRepository productRepository;
     private final StockMovementRepository movementRepository;
+    private static final Logger log = LoggerFactory.getLogger(StockService.class);
 
     public void increaseStock(Long productId, Integer quantity) {
         Product product = getProduct(productId);
 
         product.setStock(product.getStock() + quantity);
         productRepository.save(product);
+
+        log.info("Stock increased | productId={} | quantity={} | newStock={}",
+                productId, quantity, product.getStock());
 
         saveMovement(product, MovementType.INCREASE, quantity, "Stock refill");
     }
@@ -33,11 +39,17 @@ public class StockService {
         Product product = getProduct(productId);
 
         if (product.getStock() < quantity) {
+            log.warn("Stock decrease failed | productId={} | requested={} | available={}",
+                    productId, quantity, product.getStock());
+
             throw new RuntimeException("Not enough stock");
         }
 
         product.setStock(product.getStock() - quantity);
         productRepository.save(product);
+
+        log.info("Stock decreased | productId={} | quantity={} | newStock={}",
+                productId, quantity, product.getStock());
 
         saveMovement(product, MovementType.DECREASE, quantity, "Sale");
     }

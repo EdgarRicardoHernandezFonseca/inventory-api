@@ -1,7 +1,11 @@
 package com.edgar.inventory.product.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.edgar.inventory.dto.ProductRequest;
@@ -29,11 +33,11 @@ public class ProductService {
         return ProductMapper.toResponse(productRepository.save(product));
     }
 
-    public List<ProductResponse> getAll() {
-        return productRepository.findAll()
-                .stream()
-                .map(ProductMapper::toResponse)
-                .toList();
+    public Page<ProductResponse> getAll(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+
+        return productRepository.findAll(pageable)
+                .map(ProductMapper::toResponse);
     }
 
     public List<ProductResponse> getLowStockProducts() {
@@ -41,5 +45,37 @@ public class ProductService {
                 .stream()
                 .map(ProductMapper::toResponse)
                 .toList();
+    }
+    
+    public Page<ProductResponse> search(
+            String name,
+            BigDecimal minPrice,
+            BigDecimal maxPrice,
+            Integer lowStock,
+            int page,
+            int size) {
+
+        Pageable pageable = PageRequest.of(page, size);
+
+        if (name != null) {
+            return productRepository
+                    .findByNameContainingIgnoreCase(name, pageable)
+                    .map(ProductMapper::toResponse);
+        }
+
+        if (minPrice != null && maxPrice != null) {
+            return productRepository
+                    .findByPriceBetween(minPrice, maxPrice, pageable)
+                    .map(ProductMapper::toResponse);
+        }
+
+        if (lowStock != null) {
+            return productRepository
+                    .findByStockLessThanEqual(lowStock, pageable)
+                    .map(ProductMapper::toResponse);
+        }
+
+        return productRepository.findAll(pageable)
+                .map(ProductMapper::toResponse);
     }
 }
