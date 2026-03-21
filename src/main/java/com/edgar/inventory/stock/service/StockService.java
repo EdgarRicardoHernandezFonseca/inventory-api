@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.edgar.inventory.entity.Product;
 import com.edgar.inventory.entity.StockMovement;
 import com.edgar.inventory.enums.MovementType;
+import com.edgar.inventory.exception.ResourceNotFoundException;
 import com.edgar.inventory.product.repository.ProductRepository;
 import com.edgar.inventory.repository.StockMovementRepository;
 
@@ -43,7 +44,7 @@ public class StockService {
 
     private Product getProduct(Long id) {
         return productRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Product not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
     }
 
     private void saveMovement(Product product, MovementType type, Integer quantity, String reason) {
