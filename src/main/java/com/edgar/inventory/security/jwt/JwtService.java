@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.crypto.SecretKey;
 
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import com.edgar.inventory.entity.User;
@@ -31,9 +32,9 @@ public class JwtService {
         return extractAllClaims(token).getSubject();
     }
 
-    public boolean isValid(String token, User user) {
+    public boolean isValid(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
-        return username.equals(user.getUsername());
+        return username.equals(userDetails.getUsername());
     }
 
     private Claims extractAllClaims(String token) {
@@ -45,6 +46,6 @@ public class JwtService {
     }
 
     private SecretKey getSignKey() {
-        return Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
+        return Jwts.SIG.HS256.key().build();
     }
 }
