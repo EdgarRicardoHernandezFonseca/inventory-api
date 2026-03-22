@@ -1,4 +1,4 @@
-package com.edgar.inventory.entity;
+package com.edgar.inventory.product.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

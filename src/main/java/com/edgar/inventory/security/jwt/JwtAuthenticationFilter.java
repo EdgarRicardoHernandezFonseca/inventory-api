@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import com.edgar.inventory.user.entity.User;
 import com.edgar.inventory.user.service.CustomUserDetailsService;
 
 import jakarta.servlet.FilterChain;
@@ -16,8 +17,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 
 import java.io.IOException;
-
-import com.edgar.inventory.entity.User;
 
 @Component
 @RequiredArgsConstructor

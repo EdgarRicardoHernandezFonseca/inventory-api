@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.edgar.inventory.entity.User;
 import com.edgar.inventory.enums.Role;
-import com.edgar.inventory.repository.UserRepository;
 import com.edgar.inventory.security.jwt.JwtService;
+import com.edgar.inventory.user.entity.User;
+import com.edgar.inventory.user.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 

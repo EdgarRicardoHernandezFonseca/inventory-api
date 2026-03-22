@@ -6,12 +6,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.edgar.inventory.entity.Product;
-import com.edgar.inventory.entity.StockMovement;
 import com.edgar.inventory.enums.MovementType;
 import com.edgar.inventory.exception.ResourceNotFoundException;
+import com.edgar.inventory.product.entity.Product;
 import com.edgar.inventory.product.repository.ProductRepository;
-import com.edgar.inventory.repository.StockMovementRepository;
+import com.edgar.inventory.stock.entity.StockMovement;
+import com.edgar.inventory.stock.repository.StockMovementRepository;
 
 import lombok.RequiredArgsConstructor;
 

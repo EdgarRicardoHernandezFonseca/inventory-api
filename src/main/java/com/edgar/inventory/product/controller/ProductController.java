@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.edgar.inventory.dto.ApiResponse;
-import com.edgar.inventory.dto.ProductRequest;
-import com.edgar.inventory.dto.ProductResponse;
+import com.edgar.inventory.product.dto.ProductRequest;
+import com.edgar.inventory.product.dto.ProductResponse;
 import com.edgar.inventory.product.service.ProductService;
 
 import io.swagger.v3.oas.annotations.Operation;

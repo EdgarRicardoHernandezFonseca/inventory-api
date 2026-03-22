@@ -7,7 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.edgar.inventory.entity.Product;
+import com.edgar.inventory.product.entity.Product;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
 

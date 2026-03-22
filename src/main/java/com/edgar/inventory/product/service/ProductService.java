@@ -8,10 +8,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import com.edgar.inventory.dto.ProductRequest;
-import com.edgar.inventory.dto.ProductResponse;
-import com.edgar.inventory.entity.Product;
-import com.edgar.inventory.mapper.ProductMapper;
+import com.edgar.inventory.product.dto.ProductRequest;
+import com.edgar.inventory.product.dto.ProductResponse;
+import com.edgar.inventory.product.entity.Product;
+import com.edgar.inventory.product.mapper.ProductMapper;
 import com.edgar.inventory.product.repository.ProductRepository;
 
 import lombok.RequiredArgsConstructor;

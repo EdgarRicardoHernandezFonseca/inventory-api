@@ -1,8 +1,10 @@
-package com.edgar.inventory.entity;
+package com.edgar.inventory.stock.entity;
 
 import java.time.LocalDateTime;
 
+import com.edgar.inventory.enums.MovementType;
 import com.edgar.inventory.enums.Role;
+import com.edgar.inventory.product.entity.Product;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,8 +13,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,35 +22,25 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "users")
+@Table(name = "stock_movements")
 @Getter @Setter
 @NoArgsConstructor @AllArgsConstructor @Builder
-public class User {
+public class StockMovement {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
-    private String username;
-
-    @Column(nullable = false)
-    private String password;
+    @ManyToOne(optional = false)
+    private Product product;
 
     @Enumerated(EnumType.STRING)
-    private Role role;
+    private MovementType type;
 
-    // Auditoría
+    @Column(nullable = false)
+    private Integer quantity;
+
+    private String reason; // opcional (venta, ajuste, etc.)
+
     private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-    
-    @PrePersist
-    public void prePersist() {
-        this.createdAt = LocalDateTime.now();
-    }
-
-    @PreUpdate
-    public void preUpdate() {
-        this.updatedAt = LocalDateTime.now();
-    }
 }

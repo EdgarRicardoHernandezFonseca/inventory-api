@@ -1,7 +1,7 @@
-package com.edgar.inventory.mapper;
+package com.edgar.inventory.product.mapper;
 
-import com.edgar.inventory.dto.ProductResponse;
-import com.edgar.inventory.entity.Product;
+import com.edgar.inventory.product.dto.ProductResponse;
+import com.edgar.inventory.product.entity.Product;
 
 public class ProductMapper {
 

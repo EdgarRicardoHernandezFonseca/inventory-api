@@ -1,4 +1,4 @@
-package com.edgar.inventory.dto;
+package com.edgar.inventory.stock.dto;
 
 import java.time.LocalDateTime;
 
