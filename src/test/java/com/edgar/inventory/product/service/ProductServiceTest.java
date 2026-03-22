@@ -16,6 +16,15 @@ import com.edgar.inventory.product.dto.ProductResponse;
 import com.edgar.inventory.product.entity.Product;
 import com.edgar.inventory.product.repository.ProductRepository;
 
+import static org.mockito.Mockito.*;
+import static org.mockito.ArgumentMatchers.*;
+
+import static org.assertj.core.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.springframework.data.domain.PageImpl;
+
 @ExtendWith(MockitoExtension.class)
 class ProductServiceTest {
 

@@ -1,5 +1,7 @@
 package com.edgar.inventory.stock.service;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -10,6 +12,13 @@ import com.edgar.inventory.exception.ResourceNotFoundException;
 import com.edgar.inventory.product.entity.Product;
 import com.edgar.inventory.product.repository.ProductRepository;
 import com.edgar.inventory.stock.repository.StockMovementRepository;
+
+import static org.mockito.Mockito.*;
+import static org.mockito.ArgumentMatchers.*;
+
+import static org.assertj.core.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 class StockServiceTest {

@@ -13,6 +13,11 @@ import com.edgar.inventory.enums.Role;
 import com.edgar.inventory.user.entity.User;
 import com.edgar.inventory.user.repository.UserRepository;
 
+import static org.mockito.Mockito.*;
+import static org.mockito.ArgumentMatchers.*;
+import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
+
 @ExtendWith(MockitoExtension.class)
 class CustomUserDetailsServiceTest {
 
