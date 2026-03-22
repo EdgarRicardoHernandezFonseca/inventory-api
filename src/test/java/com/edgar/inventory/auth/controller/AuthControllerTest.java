@@ -1,5 +1,10 @@
 package com.edgar.inventory.auth.controller;
 
+import com.edgar.inventory.dto.ApiError;
+import com.edgar.inventory.dto.ApiResponse;
+import com.edgar.inventory.enums.MovementType;
+import com.edgar.inventory.enums.Role;
+import com.edgar.inventory.security.jwt.JwtAuthenticationFilter;
 import com.edgar.inventory.security.jwt.JwtService;
 import com.edgar.inventory.user.entity.User;
 import com.edgar.inventory.user.repository.UserRepository;
@@ -7,6 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,7 +25,14 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(AuthController.class)
+@WebMvcTest(
+	    controllers = AuthController.class,
+	    excludeAutoConfiguration = {
+	        org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class,
+	        org.springframework.boot.autoconfigure.security.servlet.SecurityFilterAutoConfiguration.class
+	    }
+	)
+@AutoConfigureMockMvc(addFilters = false)
 class AuthControllerTest {
 
     @Autowired
@@ -36,6 +49,9 @@ class AuthControllerTest {
 
     @Autowired
     private ObjectMapper objectMapper;
+    
+    @MockBean
+    private JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Test
     void shouldRegisterUser() throws Exception {

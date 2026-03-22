@@ -1,12 +1,15 @@
 package com.edgar.inventory.product.controller;
 
+import com.edgar.inventory.auth.controller.AuthController;
 import com.edgar.inventory.product.dto.ProductRequest;
 import com.edgar.inventory.product.dto.ProductResponse;
 import com.edgar.inventory.product.service.ProductService;
+import com.edgar.inventory.security.jwt.JwtAuthenticationFilter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
@@ -23,7 +26,14 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(ProductController.class)
+@WebMvcTest(
+	    controllers = ProductController.class,
+	    excludeAutoConfiguration = {
+	        org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class,
+	        org.springframework.boot.autoconfigure.security.servlet.SecurityFilterAutoConfiguration.class
+	    }
+	)
+@AutoConfigureMockMvc(addFilters = false)
 class ProductControllerTest {
 
     @Autowired
@@ -34,6 +44,9 @@ class ProductControllerTest {
 
     @Autowired
     private ObjectMapper objectMapper;
+    
+    @MockBean
+    private JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Test
     @WithMockUser(roles = {"ADMIN"})
