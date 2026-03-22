@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.edgar.inventory.stock.service.StockService;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -18,6 +19,7 @@ public class StockController {
 
     private final StockService stockService;
 
+    @SecurityRequirement(name = "bearerAuth")
     @PostMapping("/increase/{productId}")
     public ResponseEntity<String> increase(@PathVariable Long productId,
                                            @RequestParam Integer quantity) {
@@ -25,6 +27,7 @@ public class StockController {
         return ResponseEntity.ok("Stock increased");
     }
 
+    @SecurityRequirement(name = "bearerAuth")
     @PostMapping("/decrease/{productId}")
     public ResponseEntity<String> decrease(@PathVariable Long productId,
                                            @RequestParam Integer quantity) {

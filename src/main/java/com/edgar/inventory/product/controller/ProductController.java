@@ -18,6 +18,7 @@ import com.edgar.inventory.dto.ProductResponse;
 import com.edgar.inventory.product.service.ProductService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -27,6 +28,7 @@ public class ProductController {
 
     private final ProductService productService;
 
+    @SecurityRequirement(name = "bearerAuth")
     @Operation(summary = "Create a new product")
     @PostMapping
     public ResponseEntity<ApiResponse<ProductResponse>> create(@RequestBody ProductRequest request) {
@@ -41,6 +43,7 @@ public class ProductController {
         );
     }
 
+    @SecurityRequirement(name = "bearerAuth")
     @Operation(summary = "Get all products")
     @GetMapping
     public ResponseEntity<ApiResponse<Page<ProductResponse>>> getAll(
@@ -58,11 +61,13 @@ public class ProductController {
         );
     }
 
+    @SecurityRequirement(name = "bearerAuth")
     @GetMapping("/low-stock")
     public ResponseEntity<List<ProductResponse>> getLowStock() {
         return ResponseEntity.ok(productService.getLowStockProducts());
     }
     
+    @SecurityRequirement(name = "bearerAuth")
     @GetMapping("/search")
     public ResponseEntity<ApiResponse<Page<ProductResponse>>> search(
             @RequestParam(required = false) String name,
