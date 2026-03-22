@@ -75,7 +75,12 @@ class ProductServiceTest {
     
     @Test
     void shouldSearchByName() {
-        Product product = Product.builder().name("Laptop").build();
+    	Product product = Product.builder()
+    	        .name("Laptop")
+    	        .price(BigDecimal.valueOf(2000))
+    	        .stock(10)
+    	        .minStock(5)
+    	        .build();
 
         Page<Product> page = new PageImpl<>(List.of(product));
 
@@ -90,7 +95,12 @@ class ProductServiceTest {
     
     @Test
     void shouldReturnLowStockProducts() {
-        Product product = Product.builder().name("Laptop").stock(3).build();
+    	Product product = Product.builder()
+    	        .name("Laptop")
+    	        .price(BigDecimal.valueOf(2000))
+    	        .stock(3)
+    	        .minStock(5)
+    	        .build();
 
         when(productRepository.findByStockLessThanEqual(5))
                 .thenReturn(List.of(product));
