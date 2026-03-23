@@ -11,12 +11,13 @@ import com.edgar.inventory.user.entity.User;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 
 @Service
 public class JwtService {
 
-    private final String SECRET_KEY = "my-secret-key-my-secret-key";
+	private final String SECRET_KEY = "bXktc3VwZXItc2VjcmV0LWtleS1teS1zdXBlci1zZWNyZXQta2V5LTEyMzQ1Ng==";
 
     public String generateToken(User user) {
         return Jwts.builder()
@@ -44,8 +45,8 @@ public class JwtService {
                 .parseSignedClaims(token)
                 .getPayload();
     }
-
+  
     private SecretKey getSignKey() {
-        return Jwts.SIG.HS256.key().build();
+        return Keys.hmacShaKeyFor(Decoders.BASE64.decode(SECRET_KEY));
     }
 }
