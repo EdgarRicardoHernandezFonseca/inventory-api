@@ -1,13 +1,8 @@
 spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5432/inventory_db
-    username: postgres
-    password: 12345678
-
   jpa:
+    show-sql: true
     hibernate:
       ddl-auto: update
-    show-sql: true
 
   jackson:
     serialization:
