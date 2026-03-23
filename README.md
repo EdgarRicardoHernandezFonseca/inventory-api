@@ -235,3 +235,62 @@ Feel free to contact me if you need a backend developer for your project.
 ## 📄 License
 
 This project is for educational and portfolio purposes.
+
+🐳 Docker Setup
+
+This project includes Docker support to simplify local development and deployment using containers.
+
+📦 Prerequisites
+
+Make sure you have installed:
+
+Docker
+Docker Compose
+🚀 Run the application with Docker
+Clone the repository:
+git clone https://github.com/your-username/inventory-api.git
+cd inventory-api
+Build and start the containers:
+docker-compose up --build
+The application will be available at:
+http://localhost:8080
+🗄️ Services Included
+inventory-api → Spring Boot application
+postgres → PostgreSQL database
+⚙️ Environment Configuration
+
+The application uses a Docker-specific configuration:
+
+spring:
+  datasource:
+    url: jdbc:postgresql://postgres:5432/inventory_db
+    username: postgres
+    password: postgres
+
+Note: The hostname postgres is defined in docker-compose.yml.
+
+🧪 Running Tests
+
+Tests are executed using the H2 in-memory database:
+
+mvn clean test
+🧹 Stop Containers
+docker-compose down
+
+To remove volumes as well:
+
+docker-compose down -v
+📌 Notes
+The database data is persisted using Docker volumes.
+You can modify environment variables directly in docker-compose.yml.
+Swagger UI is available at:
+http://localhost:8080/swagger-ui.html
+
+
+📦 Deployment Ready
+
+This project is production-ready and can be deployed using:
+
+Docker / Docker Compose
+Cloud platforms (AWS, Render, Railway, etc.)
+CI/CD pipelines (GitHub Actions, GitLab CI)
