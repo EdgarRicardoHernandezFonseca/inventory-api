@@ -214,24 +214,6 @@ Java | Spring Boot | REST APIs | AWS
 
 ---
 
-# 💼 Freelance Services
-
-I can help you build or customize:
-
-REST APIs with Java and Spring Boot
-
-Authentication systems (JWT / OAuth2)
-
-Backend architecture for scalable applications
-
-Database design and integration
-
-Microservices and cloud-ready backend systems
-
-Feel free to contact me if you need a backend developer for your project.
-
----
-
 ## 📄 License
 
 This project is for educational and portfolio purposes.
